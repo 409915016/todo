@@ -1,0 +1,230 @@
+@charset "UTF-8";
+@import "reset.min.css";
+
+@main_color: #25b99a;
+body, input, button {
+  font-family: 'Roboto', sans-serif;
+}
+
+.noFill {
+  fill: none;
+}
+
+body {
+  background: #edf0f1;
+  padding: 80px 0 0 0;
+}
+
+header {
+  width: 100%;
+  height: 80px;
+  position: fixed;
+  padding: 15px;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  background: @main_color;
+  box-shadow: 0 2px 4px rgba(44, 62, 80, .15);
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  //border-radius: 0 0 10px 10px;
+  input {
+    width: 100%;
+    height: 50px;
+    float: left;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 400;
+    text-indent: 18px;
+    padding: 0 60px 0 0;
+    background: rgba(255, 255, 255, .2);
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    //border-radius: 5px 5px 25px 25px;
+
+    border: 0;
+    box-shadow: none;
+    outline: none;
+
+    appearance: none;
+
+    &::-webkit-input-placeholder {
+      color: rgba(255, 255, 255, .75)
+
+    }
+
+  }
+  button {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 2;
+    border-radius: 25px;
+    background: #fff;
+    border: 0;
+    box-shadow: none;
+    outline: none;
+    appearance: none;
+    svg {
+      width: 16px;
+      height: 15px;
+      position: absolute;
+      top: 50%;;
+      left: 50%;
+      margin: -8px 0 0 -8px;
+      .fill {
+        fill: @main_color
+      }
+
+    }
+  }
+
+}
+
+.container {
+  width: 100%;
+  float: left;
+  padding: 15px;
+
+}
+
+ul.todo {
+  width: 100%;
+  float: left;
+  li {
+    &:last-of-type {
+      margin: 0;
+    }
+    font-size: 14px;
+    font-weight: 400;
+    color: #444;
+    line-height: 20px;
+    width: 100%;
+    min-height: 50%;
+    float: left;
+    background: #fff;
+    position: relative;
+    border-radius: 5px;
+    box-shadow: 0 1px 2px rgba(44, 62, 80, .10);
+    margin: 0 0 10px 0;
+    padding: 14px 100px 14px 14px;
+    .buttons {
+      width: 100px;
+      height: 50px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      button {
+        width: 50px;
+        height: 50px;
+        float: left;
+        position: relative;
+        background: none;
+        border: 0;
+        box-shadow: none;
+        outline: none;
+        cursor: pointer;
+        appearance: none;
+        svg {
+          width: 22px;
+          height: 22px;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          margin: -11px 0 0 -11px;
+          .fill {
+            transition: fill 0.2s ease;
+          }
+
+        }
+
+        &:last-of-type:before {
+          content: '';
+          width: 1px;
+          height: 30px;
+          position: absolute;
+          top: 10px;
+          left: 0;
+          background: #edf0f1;
+        }
+        &.remove svg .fill {
+          fill: #c0cecb;
+        }
+        &.complete svg {
+          border-radius: 11px;
+          border: 1.5px solid @main_color;
+          transition: background .2s ease;
+        }
+        &.complete svg .fill {
+          fill: @main_color;
+        }
+        &.remove:hover svg .fill {
+          fill: #e85656
+        }
+
+      }
+
+    }
+
+  }
+
+}
+
+ul.todo {
+
+  &#todo {
+    &:empty:after {
+      margin: 15px 0 0 0;
+      content: 'You have nothing to-do!';
+    }
+  }
+  &#todo:empty:after, &#completed:empty:after {
+    width: 100%;
+    display: block;
+    text-align: center;
+    font-size: 12px;
+    color: #aaa;
+  }
+
+  &#completed {
+    position: relative;
+    padding: 60px 0 0 0;
+    &:empty:after {
+      content: 'You have yet to complete any tasks.';
+    }
+    &:before {
+      content: '';
+      width: 150px;
+      height: 1px;
+      background: #d8e5e0;
+      position: absolute;
+      top: 30px;
+      left: 50%;
+      margin: 0 0 0 -75px;
+
+    }
+
+    li .buttons button.complete svg {
+      background: @main_color;
+      border: 0;
+      .fill {
+        fill: #fff
+      }
+    }
+  }
+  &:not(#completed) {
+    li .buttons button.complete:hover svg {
+      background: tint(@main_color, .75);
+      border: 0;
+      .fill {
+        fill: #fff
+      }
+    }
+
+  }
+
+}
